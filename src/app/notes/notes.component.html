@@ -1,3 +1,25 @@
-<p>
-  notes works!
-</p>
+<div class="ui grid">
+  <div class="two wide column">
+    <div class="column">
+      <div class="ui vertical fluid tabular menu">
+        <a class="item active">Create</a>
+        <a class="item">Notes</a>
+      </div>
+    </div>
+  </div>
+  <div class="fourteen wide stretched column">
+    <div class="column">
+      <div class="ui form">
+        <form>
+          <div class="field">
+            <label>Text</label>
+            <textarea [(ngModel)]="inputText" name="inputText"></textarea>
+          </div>
+        </form>
+      </div>
+      <button class="ui primary button" (click)="splitInputToArray()" [disabled]="inputText == '' || inputText == undefined">Click</button>
+      <div class="ui segment outputText">{{ inputText }}</div>
+      <app-snippets *ngFor="let snippet of snippets" [snippet]="snippet"></app-snippets>
+    </div>
+  </div>
+</div>
