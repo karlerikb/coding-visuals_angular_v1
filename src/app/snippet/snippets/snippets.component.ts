@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { Snippet } from '../snippet.model';
+
 @Component({
   selector: 'app-snippets',
   templateUrl: './snippets.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SnippetsComponent implements OnInit {
 
-  @Input() snippet: { type: string, contents: Array<string> };
+  @Input() snippet: Snippet;
   
   constructor() { }
 

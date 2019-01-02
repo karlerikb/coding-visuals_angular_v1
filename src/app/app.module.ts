@@ -3,15 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { NotesService } from './notes.service';
+import { SnippetsService } from './snippet/snippets/snippets.service';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
-import { SnippetsComponent } from './notes/snippets/snippets.component';
-import { TextComponent } from './notes/snippets/text/text.component';
-import { ListComponent } from './notes/snippets/list/list.component';
+import { SnippetsComponent } from './snippet/snippets/snippets.component';
+import { TextComponent } from './snippet/snippets/text/text.component';
+import { ListComponent } from './snippet/snippets/list/list.component';
+import { SnippetsListComponent } from './snippet/snippets-list/snippets-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ListComponent } from './notes/snippets/list/list.component';
     NotesComponent,
     SnippetsComponent,
     TextComponent,
-    ListComponent
+    ListComponent,
+    SnippetsListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { ListComponent } from './notes/snippets/list/list.component';
     AppRoutingModule
   ],
   providers: [
-    NotesService
+    SnippetsService
   ],
   bootstrap: [AppComponent]
 })

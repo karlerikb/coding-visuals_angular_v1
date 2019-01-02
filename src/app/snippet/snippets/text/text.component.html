@@ -1,0 +1,22 @@
+<div
+  class="ui"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (mouseup)="onMouseUp()"
+  [ngClass]="{ segments: mouseHover }">
+  <div 
+    class="ui basic segment" 
+    [ngClass]="{ top: mouseHover, secondary: mouseHover, attached: mouseHover }">
+    {{ snippet.contents[0] }}
+  </div>
+  <div 
+    class="ui bottom attached segment"
+    *ngIf="mouseHover">
+    <div class="ui icon buttons">
+      <div class="ui button"><i class="file icon"></i></div>
+      <div class="ui button"><i class="save icon"></i></div>
+      <div class="ui button disabled"><i class="upload icon"></i></div>
+      <div class="ui button"><i class="download icon"></i></div>
+    </div>
+  </div>
+</div>

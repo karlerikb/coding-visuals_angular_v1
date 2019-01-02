@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NotesService } from '../notes.service';
+import { Snippet } from '../snippet/snippet.model';
+import { UnmodifiedSnippet } from '../snippet/unmodified-snippet.model';
+import { SnippetsService } from '../snippet/snippets/snippets.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,112 +11,45 @@ import { NotesService } from '../notes.service';
 })
 export class NotesComponent implements OnInit {
 
-  snippets: Array<{ type: string, contents: Array<string> }> = [];
+  snippets: Array<Snippet> = [];
   inputText: string;
+  disableSave: boolean = false;
 
-  constructor(private notesService: NotesService) { }
+  constructor(private snippetsService: SnippetsService) { }
 
   ngOnInit() {
   }
 
   splitInputToArray() {
-    const inputArray = this.inputText.replace(/(\r\n|\n|\r)/gm,"\r\n").split("\r\n");
+    const inputArray = this.inputText
+      .replace(/(\r\n|\n|\r)/gm,"\r\n")
+      .split("\r\n")
+      .filter(input => input != "" && input != "*");
     this.generateSnippetObjects(inputArray);
   }
 
   generateSnippetObjects(snippets: Array<string>) {
-    const snippetObjects: Array<{ type: string, contents: string }> = [];
+    const snippetObjects: Array<UnmodifiedSnippet> = [];
 
     snippets.forEach(snippet => {
       let categorisedSnippet = this.categoriseSnippet(snippet.trim());
       snippetObjects.push(categorisedSnippet);
     });
-    this.snippets = this.notesService.mutateSnippetArray(snippetObjects);
+    this.snippets = this.snippetsService.mutateSnippetArray(snippetObjects);
   }
 
   categoriseSnippet(snippet: string) {
     if (snippet.startsWith("*")) {
       let cleanedSnippet = snippet.substring(1).trim();
-      return { type: 'list', contents: cleanedSnippet }
+      return new UnmodifiedSnippet('list', cleanedSnippet); // { type: 'list', contents: cleanedSnippet }
     }
-    return { type: 'text', contents: snippet };
+    return new UnmodifiedSnippet('text', snippet); // { type: 'text', contents: snippet };
   }
 
-
-
-
-
-  // parseInput() {
-  //   const array = this.inputText.replace(/(\r\n|\n|\r)/gm,"§§§").split("§§§");
-  //   this.generateElements(array);
-  //   // this.generateListItems(this.elements);
-  // }
-
-  // generateElements(elements) {
-  //   const objects = [];
-
-  //   elements.forEach(element => {
-  //     objects.push(this.categoriseElement(element.trim()));
-  //   });
-  //   this.elements = objects;
-  // }
-
-  // categoriseElement(element) {
-  //   if (element.startsWith("*")) {
-  //     return { type: 'list', content: element };
-  //   }
-  //   return { type : 'text', content: element };
-  // }
-
-  // generateListItems(elements) {
-  //   const array = [];
-  //   let previousIsList: boolean = false;
-  //   let nextIsList: boolean = false;
-  //   let listArray = [];
-
-  //   console.log(elements.length);
-
-  //   elements.forEach((element, index) => {
-
-  //     console.log(element.type);
-
-  //     if (index === 0) {
-  //       previousIsList = false;
-  //       nextIsList = (elements[index++].type) === 'list' ? true : false;
-  //     }
-  //     if (index === elements.length - 1) {
-  //       previousIsList = (elements[index - 1].type) === 'list' ? true : false;
-  //       nextIsList = false;
-  //     }
-
-  //     if (index > 0 && index < elements.length - 1) {
-  //       previousIsList = (elements[--index].type) === 'list' ? true : false;
-  //       nextIsList = (elements[++index].type) === 'list' ? true : false;
-  //     }
-  //     console.log(previousIsList, nextIsList);
-
-  //     if (element.type === 'text') {
-  //       array.push(element);
-  //     }
-  //     if (element.type === 'list') {
-  //       listArray.push(element.content);
-  //       if (!previousIsList && !nextIsList) {
-  //         array.push({
-  //           type: element.type,
-  //           content: [element.content]
-  //         });
-  //       }
-  //       if (!nextIsList) {
-  //         array.push({
-  //           type: element.type,
-  //           content: listArray
-  //         });
-  //         listArray = [];
-  //       }
-  //     }
-  //   });
-  //   console.log(array);
-  //   this.elements = array;
-  // }
+  onInputChange(notesInput, event) {
+    if (notesInput.value == "") {
+      this.snippets = [];
+    }
+  }
 
 }

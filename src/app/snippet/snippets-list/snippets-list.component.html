@@ -1,0 +1,17 @@
+<div class="snippets">
+  <h4 class="ui horizontal divider header">
+    <i class="file icon" [ngClass]="{ alternate: !setPlaceholder }"></i>
+    Preview
+  </h4>
+  <div class="ui placeholder segment" *ngIf="setPlaceholder; else snippetList">
+    <div class="ui icon header">
+      <i class="file outline icon"></i>
+      Nothing to preview ...
+    </div>
+  </div>
+  <ng-template #snippetList>
+    <div class="ui segment">
+      <app-snippets *ngFor="let snippet of snippets" [snippet]="snippet"></app-snippets>
+    </div>
+  </ng-template>
+</div>

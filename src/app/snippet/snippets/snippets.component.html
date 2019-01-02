@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="snippet.type">
+  <app-text *ngSwitchCase="'text'" [snippet]="snippet"></app-text>
+  <app-list *ngSwitchCase="'list'" [snippet]="snippet"></app-list>
+</ng-container>
