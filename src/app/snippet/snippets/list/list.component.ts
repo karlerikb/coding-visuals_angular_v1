@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Snippet } from '../../snippet.model';
 
@@ -16,7 +17,7 @@ export class ListComponent implements OnInit {
   listHeader: string;
   preListArray: Array<string>;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if (this.snippet.conf && this.snippet.conf['preList']) {
@@ -29,7 +30,12 @@ export class ListComponent implements OnInit {
   }
 
   onMouseEnter() {
-    this.mouseHover = true;
+    const url = this.router.url.split('/');
+    if (url[1] === 'notes' && url[2] === 'new') {
+      this.mouseHover = true;
+    } else {
+      this.mouseHover = false;
+    }
   }
 
   onMouseLeave() {

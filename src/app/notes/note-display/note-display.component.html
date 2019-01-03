@@ -1,0 +1,13 @@
+<div class="ui basic segment">
+  <div class="ui segments">
+    <div class="ui top segment">
+      <h3 class="ui header">{{ note.title }}</h3>
+    </div>
+    <div class="ui segment notesBody">
+      <app-snippets *ngFor="let snippet of note.snippets" [snippet]="snippet"></app-snippets>
+    </div>
+    <div class="ui bottom segment">
+      <div class="ui label" *ngFor="let tag of note.tags">{{ tag }}</div>
+    </div>
+  </div>
+</div>

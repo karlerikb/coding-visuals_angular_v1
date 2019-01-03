@@ -2,42 +2,14 @@
   <div class="two wide column">
     <div class="column">
       <div class="ui vertical fluid tabular menu">
-        <a class="item active">Create</a>
-        <a class="item">Notes</a>
+        <a class="item" routerLink="new" routerLinkActive="active">Create</a>
+        <a class="item" routerLink="list" routerLinkActive="active">Notes</a>
       </div>
     </div>
   </div>
   <div class="fourteen wide stretched column">
     <div class="column">
-      <div class="ui segments">
-        <div class="ui top attached segment">
-          <div class="ui form">
-            <form>
-              <div class="field">
-                <label>Text</label>
-                <textarea
-                  [(ngModel)]="inputText"
-                  (input)="onInputChange(notesInput, $event)"
-                  name="inputText"
-                  #notesInput="ngModel">
-                </textarea>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="ui three bottom attached buttons">
-          <button 
-            class="ui primary button"
-            (click)="splitInputToArray()"
-            [disabled]="inputText == '' || inputText == undefined">
-            Preview
-          </button>
-          <button class="ui button">Clear</button>
-          <button class="ui button">Save</button>
-        </div>
-      </div>
-      <!-- <div class="ui segment outputText">{{ inputText }}</div> -->
-      <app-snippets-list [snippets]="snippets"></app-snippets-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

@@ -1,0 +1,46 @@
+<div class="ui segments">
+  <div class="ui top attached segment">
+    <div class="ui form">
+      <form>
+        <div class="field">
+          <label>Title</label>
+          <input type="text" name="noteTitle" placeholder="Enter title">
+        </div>
+        <div class="field">
+          <label>Text</label>
+          <textarea
+            [(ngModel)]="inputText"
+            (input)="onInputChange(notesInput, $event)"
+            name="noteText"
+            #notesInput="ngModel"
+            placeholder="Enter input">
+          </textarea>
+        </div>
+        <div class="fields">
+          <div class="six wide field">
+            <label>Tags</label>
+            <div class="ui right labeled left icon input">
+              <i class="tags icon"></i>
+              <input type="text" placeholder="Enter tag">
+              <a class="ui tag label">
+                Add Tag
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="ui three bottom attached buttons">
+    <button 
+      class="ui primary button"
+      (click)="splitInputToArray()"
+      [disabled]="inputText == '' || inputText == undefined">
+      Preview
+    </button>
+    <button class="ui button">Clear</button>
+    <button class="ui button">Save</button>
+  </div>
+</div>
+<app-snippets-list [snippets]="snippets"></app-snippets-list>
+

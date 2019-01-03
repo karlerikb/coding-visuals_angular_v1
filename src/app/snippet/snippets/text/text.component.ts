@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Snippet } from '../../snippet.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-text',
@@ -12,13 +13,18 @@ export class TextComponent implements OnInit {
   @Input() snippet: Snippet;
   mouseHover: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   onMouseEnter() {
-    this.mouseHover = true;
+    const url = this.router.url.split('/');
+    if (url[1] === 'notes' && url[2] === 'new') {
+      this.mouseHover = true;
+    } else {
+      this.mouseHover = false;
+    }
   }
 
   onMouseLeave() {

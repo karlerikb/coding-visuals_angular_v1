@@ -13,6 +13,12 @@ import { SnippetsComponent } from './snippet/snippets/snippets.component';
 import { TextComponent } from './snippet/snippets/text/text.component';
 import { ListComponent } from './snippet/snippets/list/list.component';
 import { SnippetsListComponent } from './snippet/snippets-list/snippets-list.component';
+import { NoteEditComponent } from './notes/note-edit/note-edit.component';
+import { NotesListComponent } from './notes/notes-list/notes-list.component';
+import { NotesListItemComponent } from './notes/notes-list/notes-list-item/notes-list-item.component';
+import { NotesService } from './notes/notes.service';
+import { NoteDisplayComponent } from './notes/note-display/note-display.component';
+import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,12 @@ import { SnippetsListComponent } from './snippet/snippets-list/snippets-list.com
     SnippetsComponent,
     TextComponent,
     ListComponent,
-    SnippetsListComponent
+    SnippetsListComponent,
+    NoteEditComponent,
+    NotesListComponent,
+    NotesListItemComponent,
+    NoteDisplayComponent,
+    NoteDisplayPlaceholderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +42,8 @@ import { SnippetsListComponent } from './snippet/snippets-list/snippets-list.com
     AppRoutingModule
   ],
   providers: [
-    SnippetsService
+    SnippetsService,
+    NotesService
   ],
   bootstrap: [AppComponent]
 })
