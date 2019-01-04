@@ -51,4 +51,8 @@ export class NotesService {
   getSingleNote(index: number) {
     return this.notes.slice()[index];
   }
+
+  addNote(note: Note) {
+    this.notes.push(note);
+  }
 }

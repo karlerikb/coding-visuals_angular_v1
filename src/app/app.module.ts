@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SnippetsService } from './snippet/snippets/snippets.service';
+import { NotesService } from './notes/notes.service';
+import { NotePreviewService } from './notes/note-edit/note-preview.service';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -16,7 +18,6 @@ import { SnippetsListComponent } from './snippet/snippets-list/snippets-list.com
 import { NoteEditComponent } from './notes/note-edit/note-edit.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesListItemComponent } from './notes/notes-list/notes-list-item/notes-list-item.component';
-import { NotesService } from './notes/notes.service';
 import { NoteDisplayComponent } from './notes/note-display/note-display.component';
 import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
 
@@ -43,7 +44,8 @@ import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-displ
   ],
   providers: [
     SnippetsService,
-    NotesService
+    NotesService,
+    NotePreviewService
   ],
   bootstrap: [AppComponent]
 })

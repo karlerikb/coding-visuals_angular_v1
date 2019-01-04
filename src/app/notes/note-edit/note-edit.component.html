@@ -1,46 +1,73 @@
-<div class="ui segments">
-  <div class="ui top attached segment">
-    <div class="ui form">
-      <form>
-        <div class="field">
-          <label>Title</label>
-          <input type="text" name="noteTitle" placeholder="Enter title">
-        </div>
-        <div class="field">
-          <label>Text</label>
-          <textarea
-            [(ngModel)]="inputText"
-            (input)="onInputChange(notesInput, $event)"
-            name="noteText"
-            #notesInput="ngModel"
-            placeholder="Enter input">
-          </textarea>
-        </div>
-        <div class="fields">
-          <div class="six wide field">
-            <label>Tags</label>
-            <div class="ui right labeled left icon input">
-              <i class="tags icon"></i>
-              <input type="text" placeholder="Enter tag">
-              <a class="ui tag label">
-                Add Tag
-              </a>
+<div class="ui basic segment">
+  <h2 class="ui centered header">Create New Note</h2>
+  <div class="ui segments">
+    <form (ngSubmit)="onSubmit(noteForm)" #noteForm="ngForm">
+      <div class="ui top attached segment">
+        <div class="ui form">
+            <div class="field">
+              <label>Title</label>
+              <input
+                type="text"
+                name="noteTitle"
+                #noteTitle="ngModel"
+                [(ngModel)]="notePreviewService.title"
+                (input)="onTitleInput(noteTitle)"
+                placeholder="Enter title">
             </div>
-          </div>
+            <div class="field">
+              <label>Text</label>
+              <textarea
+                name="noteText"
+                #notesInput="ngModel"
+                [(ngModel)]="inputText"
+                (input)="onInputBodyChange(notesInput)"
+                placeholder="Enter input">
+              </textarea>
+            </div>
+            <div class="fields">
+              <div class="six wide field">
+                <label>Tags</label>
+                <div class="ui right labeled left icon input">
+                  <i class="tags icon"></i>
+                  <input
+                  type="text"
+                  #noteTags
+                  (input)="onAddTagsChange(noteTags)"
+                  placeholder="Enter tag">
+                  <button 
+                    class="ui tag label button"
+                    type="button"
+                    (click)="onAddTag()"
+                    [disabled]="disableAddTagBtn">
+                    Add Tag
+                  </button>
+                </div>
+              </div>
+            </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="ui three bottom attached buttons">
+        <button 
+          class="ui button"
+          type="submit"
+          [disabled]="!saveBtnIsAllowed">
+          Save
+        </button>
+        <button
+        class="ui button"
+        type="button"
+        (click)="onClearForm()"
+        [disabled]="notePreviewService.setPlaceholder && !addTagHasInput">
+        Clear
+      </button>
+      <button
+        class="ui button"
+        type="button"
+        (click)="onNoteDelete()">
+        Delete
+      </button>
+      </div>
+    </form>
   </div>
-  <div class="ui three bottom attached buttons">
-    <button 
-      class="ui primary button"
-      (click)="splitInputToArray()"
-      [disabled]="inputText == '' || inputText == undefined">
-      Preview
-    </button>
-    <button class="ui button">Clear</button>
-    <button class="ui button">Save</button>
-  </div>
+  <app-snippets-list></app-snippets-list>
 </div>
-<app-snippets-list [snippets]="snippets"></app-snippets-list>
-

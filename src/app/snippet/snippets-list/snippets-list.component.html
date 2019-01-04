@@ -5,8 +5,21 @@
   </h4>
   <app-note-display-placeholder *ngIf="setPlaceholder; else snippetList"></app-note-display-placeholder>
   <ng-template #snippetList>
-    <div class="ui segment">
-      <app-snippets *ngFor="let snippet of snippets" [snippet]="snippet"></app-snippets>
+    <div class="ui segments">
+      <div class="ui top attached segment">
+        <div class="ui basic segment">
+          <h3 class="ui header">{{ notePreviewService.title }}</h3>
+        </div>
+      </div>
+      <div class="ui attached segment">
+        <app-snippets *ngFor="let snippet of notePreviewService.snippets" [snippet]="snippet"></app-snippets>
+      </div>
+      <div class="ui bottom attached segment">
+        <div class="ui label" *ngFor="let tag of notePreviewService.tags">
+          {{ tag }}
+          <i class="delete icon" (click)="deleteTag(tag)"></i>
+        </div>
+      </div>
     </div>
   </ng-template>
 </div>
