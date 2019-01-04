@@ -20,6 +20,8 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesListItemComponent } from './notes/notes-list/notes-list-item/notes-list-item.component';
 import { NoteDisplayComponent } from './notes/note-display/note-display.component';
 import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
+import { NoteResolverService } from './notes/note-resolver.service';
+import { NotePageComponent } from './notes/note-page/note-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-displ
     NotesListComponent,
     NotesListItemComponent,
     NoteDisplayComponent,
-    NoteDisplayPlaceholderComponent
+    NoteDisplayPlaceholderComponent,
+    NotePageComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-displ
   providers: [
     SnippetsService,
     NotesService,
-    NotePreviewService
+    NotePreviewService,
+    NoteResolverService
   ],
   bootstrap: [AppComponent]
 })

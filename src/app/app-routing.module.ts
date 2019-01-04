@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { NoteResolverService } from './notes/note-resolver.service';
+
 import { CoursesComponent } from './courses/courses.component';
 import { NotesComponent } from './notes/notes.component';
 import { NoteEditComponent } from './notes/note-edit/note-edit.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
 import { NoteDisplayComponent } from './notes/note-display/note-display.component';
+import { NotePageComponent } from './notes/note-page/note-page.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  { 
+    path: 'note', children: [
+      { path: '', redirectTo: '/notes/list', pathMatch: 'full' },
+      { path: ':id', component: NotePageComponent, resolve: { note: NoteResolverService } }
+    ] 
+  },
   { path: 'courses', component: CoursesComponent },
   { 
     path: 'notes', component: NotesComponent, children: [

@@ -6,8 +6,17 @@
     <div class="ui segment notesBody">
       <app-snippets *ngFor="let snippet of note.snippets" [snippet]="snippet"></app-snippets>
     </div>
-    <div class="ui bottom segment">
+    <div class="ui segment">
       <div class="ui label" *ngFor="let tag of note.tags">{{ tag }}</div>
     </div>
+    <div class="ui three bottom attached buttons">
+        <button
+          class="ui button"
+          (click)="onOpenNote()">
+          Open
+        </button>
+        <button class="ui button">Edit</button>
+        <button class="ui button">Delete</button>
+      </div>
   </div>
 </div>

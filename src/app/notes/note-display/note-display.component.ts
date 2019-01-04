@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
@@ -12,22 +12,31 @@ import { NotesService } from '../notes.service';
 export class NoteDisplayComponent implements OnInit {
 
   note: Note
+  noteId: number;
 
-  constructor(private notesService: NotesService, private route: ActivatedRoute) { }
+  constructor(
+    private notesService: NotesService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    const noteId = +this.route.snapshot.params['id'];
-    this.getNoteFromService(noteId);
+    this.noteId = +this.route.snapshot.params['id'];
+    this.getNoteFromService(this.noteId);
     this.route.params.subscribe(
       (params: Params) => {
-        const noteId = +params['id'];
-        this.getNoteFromService(noteId);
+        this.noteId = +params['id'];
+        this.getNoteFromService(this.noteId);
       }
     );
   }
 
   getNoteFromService(noteId: number) {
     this.note = this.notesService.getSingleNote(noteId);
+  }
+
+  onOpenNote() {
+    console.log('opened note!', this.noteId);
+    this.router.navigate(['/','note', this.noteId]);
   }
 
 }
