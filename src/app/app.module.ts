@@ -22,6 +22,13 @@ import { NoteDisplayComponent } from './notes/note-display/note-display.componen
 import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
 import { NoteResolverService } from './notes/note-resolver.service';
 import { NotePageComponent } from './notes/note-page/note-page.component';
+import { PagesComponent } from './pages/pages.component';
+import { PageEditComponent } from './pages/page-edit/page-edit.component';
+import { PagesListComponent } from './pages/pages-list/pages-list.component';
+import { PageDisplayComponent } from './pages/page-display/page-display.component';
+import { NoteEditFormComponent } from './notes/note-edit/note-edit-form/note-edit-form.component';
+import { PageEditNotelistPreviewComponent } from './pages/page-edit/page-edit-notelist-preview/page-edit-notelist-preview.component';
+import { PagePreviewService } from './pages/page-edit/page-preview.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,13 @@ import { NotePageComponent } from './notes/note-page/note-page.component';
     NotesListItemComponent,
     NoteDisplayComponent,
     NoteDisplayPlaceholderComponent,
-    NotePageComponent
+    NotePageComponent,
+    PagesComponent,
+    PageEditComponent,
+    PagesListComponent,
+    PageDisplayComponent,
+    NoteEditFormComponent,
+    PageEditNotelistPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +62,8 @@ import { NotePageComponent } from './notes/note-page/note-page.component';
     SnippetsService,
     NotesService,
     NotePreviewService,
-    NoteResolverService
+    NoteResolverService,
+    PagePreviewService
   ],
   bootstrap: [AppComponent]
 })

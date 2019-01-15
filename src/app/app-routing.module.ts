@@ -10,6 +10,10 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NoteDisplayPlaceholderComponent } from './notes/note-display/note-display-placeholder/note-display-placeholder.component';
 import { NoteDisplayComponent } from './notes/note-display/note-display.component';
 import { NotePageComponent } from './notes/note-page/note-page.component';
+import { PagesComponent } from './pages/pages.component';
+import { PageEditComponent } from './pages/page-edit/page-edit.component';
+import { PagesListComponent } from './pages/pages-list/pages-list.component';
+import { PageDisplayComponent } from './pages/page-display/page-display.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
@@ -32,6 +36,18 @@ const appRoutes: Routes = [
       }
     ] 
   },
+  { 
+    path: 'pages', component: PagesComponent, children: [
+      { path: '', redirectTo: '/pages/list', pathMatch: 'full' },
+      { path: 'new', component: PageEditComponent },
+      {
+        path: 'list', component: PagesListComponent, children: [
+          { path: '', component: NoteDisplayPlaceholderComponent, pathMatch: 'full' },
+          { path: ':id', component: PageDisplayComponent }
+        ]
+      }
+    ] 
+  }
 ];
 
 @NgModule({

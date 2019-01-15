@@ -56,8 +56,14 @@ export class NotePreviewService {
     this.evaluatePlaceholderCondition();
   }
 
+  generateNoteId() {
+    const startDateMs = new Date('01-01-2019').getTime();
+    const todayMs = new Date().getTime();
+    return todayMs - startDateMs;
+  }
+
   prepareNote(): Note {
-    return new Note(this.title, this.snippets, this.tags);
+    return new Note(this.generateNoteId(), this.title, this.snippets, this.tags);
   }
 
   getPlaceholderCondition(): boolean {

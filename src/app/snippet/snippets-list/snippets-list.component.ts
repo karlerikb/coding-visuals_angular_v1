@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NotePreviewService } from 'src/app/notes/note-edit/note-preview.service';
 import { Subscription } from 'rxjs';
@@ -14,10 +15,13 @@ export class SnippetsListComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   setPlaceholder: boolean;
+  setPlaceholderHeader: boolean;
 
-  constructor(private notePreviewService: NotePreviewService) { }
+  constructor(private notePreviewService: NotePreviewService, private router: Router) { }
 
   ngOnInit() {
+    console.log(this.router.url);
+    this.setPlaceholderHeader = (this.router.url.split('/')[1] === 'notes') ? true : false;
     this.setPlaceholder = this.notePreviewService.getPlaceholderCondition();
     this.subscription = this.notePreviewService.formFieldFlagsChanged.subscribe(
       (condition: boolean) => {
