@@ -1,0 +1,37 @@
+<h2 class="ui header">Create New Page</h2>
+
+<div class="ui segments">
+  <div class="ui top attached padded segment">
+    <!-- Title -->
+    <h3 class="ui header">Page Title</h3>
+    <div class="ui form">
+      <div class="ui inline fields">
+        <div class="thirteen wide field">
+          <label>Title</label>
+          <input type="text" placeholder="Page Title">
+        </div>
+        <div class="three wide field">
+          <label>Id</label>
+          <input type="text" readonly value="1">
+        </div>
+      </div>
+    </div>
+    
+    <h3 class="ui header">Add or Edit Note</h3>
+    <!-- Edit-Note or Edit-Note-Placeholder -->
+    <app-edit-note></app-edit-note>
+    <app-edit-note-placeholder></app-edit-note-placeholder>
+  
+    <!-- Note-List-Editmode  -->
+    <h3 class="ui header">Note List</h3>
+    <app-notelist-editmode></app-notelist-editmode>
+  
+    <!-- Controls -->
+  </div>
+  <div class="ui four bottom attached buttons">
+    <div class="ui button">Add Page</div>
+    <div class="ui button">Clear Page</div>
+    <div class="ui button">Delete Page</div>
+    <div class="ui button">Cancel</div>
+  </div>
+</div>
