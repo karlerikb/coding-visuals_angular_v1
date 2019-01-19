@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="snippet.type">
+  <app-textsnippet-editmode *ngSwitchCase="'text'" [snippet]="snippet"></app-textsnippet-editmode>
+  <app-listsnippet-editmode *ngSwitchCase="'list'" [snippet]="snippet"></app-listsnippet-editmode>
+</ng-container>

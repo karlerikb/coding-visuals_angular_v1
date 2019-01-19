@@ -19,7 +19,15 @@ import { EditNotePreviewComponent } from './page-editmode/edit-note/edit-note-pr
 import { NotelistEditmodeComponent } from './page-editmode/notelist-editmode/notelist-editmode.component';
 import { EditNotePreviewPlaceholderComponent } from './page-editmode/edit-note/edit-note-preview/edit-note-preview-placeholder/edit-note-preview-placeholder.component';
 import { NoteEditmodeComponent } from './page-editmode/notelist-editmode/note-editmode/note-editmode.component';
+import { NotelistEditmodePlaceholderComponent } from './page-editmode/notelist-editmode/notelist-editmode-placeholder/notelist-editmode-placeholder.component';
 
+import { PagePreviewService } from './services/page-preview.service';
+import { PageService } from './services/page.service';
+import { NotePreviewService } from './services/note-preview.service';
+import { NoteService } from './services/note.service';
+import { SnippetEditmodeComponent } from './page-editmode/snippet-editmode/snippet-editmode.component';
+import { TextsnippetEditmodeComponent } from './page-editmode/snippet-editmode/textsnippet-editmode/textsnippet-editmode.component';
+import { ListsnippetEditmodeComponent } from './page-editmode/snippet-editmode/listsnippet-editmode/listsnippet-editmode.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,11 @@ import { NoteEditmodeComponent } from './page-editmode/notelist-editmode/note-ed
     EditNotePreviewComponent,
     NotelistEditmodeComponent,
     EditNotePreviewPlaceholderComponent,
-    NoteEditmodeComponent
+    NoteEditmodeComponent,
+    NotelistEditmodePlaceholderComponent,
+    SnippetEditmodeComponent,
+    TextsnippetEditmodeComponent,
+    ListsnippetEditmodeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +57,10 @@ import { NoteEditmodeComponent } from './page-editmode/notelist-editmode/note-ed
     AppRoutingModule
   ],
   providers: [
+    PageService,
+    NoteService,
+    PagePreviewService,
+    NotePreviewService,
   ],
   bootstrap: [AppComponent]
 })

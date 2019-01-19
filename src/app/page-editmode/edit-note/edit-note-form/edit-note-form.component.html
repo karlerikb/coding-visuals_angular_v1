@@ -1,36 +1,71 @@
 <div class="ui segments">
   <div class="ui top attached segment">
-    <div class="ui form">
+    <form class="ui form" #noteForm="ngForm">
       <div class="inline fields">
         <div class="thirteen wide field">
           <label>Title</label>
-          <input type="text" placeholder="Note Title">
+          <input
+            ngModel
+            #noteTitle="ngModel"
+            type="text"
+            name="noteTitle"
+            placeholder="Note Title"
+            (input)="onInputTitle(noteTitle)">
         </div>
         <div class="three wide field">
           <label>Id</label>
-          <input type="text" readonly value="1-1">
+          <input type="text" readonly [value]="notePreview.id">
         </div>
       </div>
       <div class="field">
         <label>Text</label>
-        <textarea></textarea>
+        <textarea
+          ngModel
+          #noteText="ngModel"
+          name="noteText"
+          placeholder="Note Text"
+          (input)="onInputNoteText(noteText)"
+          ></textarea>
       </div>
       <div class="inline fields">
         <div class="seven wide field">
           <label>Tags</label>
           <div class="ui right labeled left icon input">
             <i class="tags icon"></i>
-            <input type="text" placeholder="Enter tag">
-            <button class="ui tag label button" type="button">Add Tag</button>
+            <input
+              #noteTags
+              name="noteTags"
+              type="text"
+              placeholder="Note tag"
+              (input)="onInputTagsField(noteTags)">
+            <button
+              class="ui tag label button"
+              type="button"
+              (click)="onAddTag(noteTags)"
+              [disabled]="tagButtonDisabled">
+              Add Tag
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
   <div class="ui four bottom attached buttons">
-    <div class="ui button">Add Note</div>
-    <div class="ui button">Clear Note</div>
-    <div class="ui button">Delete Note</div>
-    <div class="ui button">Cancel</div>
+    <button
+      class="ui button"
+      type="submit"
+      (click)="onAddNote()"
+      [disabled]="addNoteButtonDisabled">
+      Add Note
+    </button>
+    <button
+      class="ui button"
+      type="button"
+      (click)="onClearNote()"
+      [disabled]="clearNoteButtonDisabled">
+      Clear Note
+    </button>
+    <button class="ui button" type="button" (click)="onDeleteNote()">Delete Note</button>
+    <button class="ui button" type="button" (click)="onCancel()" [disabled]="notePreview.newNoteIsCreated">Cancel Edit</button>
   </div>
 </div>

@@ -15,7 +15,12 @@ const appRoutes: Routes = [
   {
     path: 'note', component: NotesComponent, children: [
       { path: '', redirectTo: '/note/list', pathMatch: 'full' },
-      { path: 'edit', component: PageEditmodeComponent },
+      {
+        path: 'edit', children: [
+          { path: '', component: PageEditmodeComponent, pathMatch: 'full' },
+          // { path: ':id', component: PageEditmodeComponent }
+        ]
+      },
       { path: 'list', component: PageListpreviewComponent },
       { path: ':id', component: PageNormalComponent }
     ] 

@@ -1,0 +1,32 @@
+<div
+  class="ui grid"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()">
+  <div class="one wide column snippetNumberLabelContainer">
+    <div class="ui grey circular middle aligned label snippetNumberLabel">{{ snippet.conf.position }}</div>
+  </div>
+  <div class="ui fifteen wide column">
+    <div
+      class="ui"
+      [ngClass]="{segments: mouseHover}">
+      <div
+        class="ui basic segment"
+        [ngClass]="{yellow: mouseHover}">
+        {{ snippet.contents[0] }}
+      </div>
+      <div class="ui bottom attached segment" *ngIf="mouseHover">
+        <div class="ui grid">
+          <div class="ui eight wide column">
+            <div class="ui labels">
+              <div class="ui label">Type <div class="detail">{{ snippet.type }}</div></div>
+              <div class="ui label">Position <div class="detail">{{ snippet.conf.position }}</div></div>
+            </div>
+          </div>
+          <div class="ui eight wide column">
+            <div class="ui right ribbon label">{{ snippet.id }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

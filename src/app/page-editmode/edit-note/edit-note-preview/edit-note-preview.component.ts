@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotePreviewService } from 'src/app/services/note-preview.service';
 
 @Component({
   selector: 'app-edit-note-preview',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditNotePreviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notePreview: NotePreviewService) { }
 
   ngOnInit() {
+  }
+
+  onRemoveTag(tagToBeDeleted: string) {
+    this.notePreview.removeTag(tagToBeDeleted);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PagePreviewService } from '../services/page-preview.service';
 
 @Component({
   selector: 'app-page-editmode',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageEditmodeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private pagePreview: PagePreviewService) { }
 
   ngOnInit() {
+    this.pagePreview.initializePreview();
   }
 
 }

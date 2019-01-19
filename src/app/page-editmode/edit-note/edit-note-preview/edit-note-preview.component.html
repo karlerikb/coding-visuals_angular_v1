@@ -1,12 +1,13 @@
-<h3 class="ui header">Note Preview</h3>
+<h3 class="ui right aligned small header">Note Preview</h3>
 <div class="ui padded segment">
-  <h4 class="ui header">Note Title</h4>
+  <h4 class="ui header">{{ notePreview.title }}</h4>
   <div class="ui divider"></div>
   <div class="ui basic segment">
-    <p>Note Body</p>
-    <p>Note Body</p>
+    <app-snippet-editmode *ngFor="let snippet of notePreview.snippets" [snippet]="snippet"></app-snippet-editmode>
   </div>
   <div class="ui divider"></div>
-  <div class="ui label">Tag</div>
-  <div class="ui label">Tag</div>
+  <div class="ui image label" *ngFor="let tag of notePreview.tags">
+    {{ tag }}
+    <i class="delete icon" (click)="onRemoveTag(tag)"></i>
+  </div>
 </div>

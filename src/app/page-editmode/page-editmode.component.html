@@ -2,31 +2,31 @@
 
 <div class="ui segments">
   <div class="ui top attached padded segment">
-    <!-- Title -->
-    <h3 class="ui header">Page Title</h3>
-    <div class="ui form">
+    
+    <!-- <h3 class="ui right aligned header">Page Title</h3> -->
+    <form class="ui form">
       <div class="ui inline fields">
         <div class="thirteen wide field">
           <label>Title</label>
-          <input type="text" placeholder="Page Title">
+          <input type="text" name="pageTitle" placeholder="Page Title" [(ngModel)]="pagePreview.title">
         </div>
         <div class="three wide field">
           <label>Id</label>
-          <input type="text" readonly value="1">
+          <input type="text" readonly [value]="pagePreview.id">
         </div>
       </div>
-    </div>
+    </form>
     
-    <h3 class="ui header">Add or Edit Note</h3>
-    <!-- Edit-Note or Edit-Note-Placeholder -->
-    <app-edit-note></app-edit-note>
-    <app-edit-note-placeholder></app-edit-note-placeholder>
+    <h3 class="ui right aligned small header">Add or Edit Note</h3>
+    <app-edit-note *ngIf="pagePreview.noteEditMode"></app-edit-note>
+    <app-edit-note-placeholder *ngIf="!pagePreview.noteEditMode"></app-edit-note-placeholder>
   
-    <!-- Note-List-Editmode  -->
-    <h3 class="ui header">Note List</h3>
+    <h3 class="ui right aligned small header">Page Preview</h3>
+    <h3 class="ui large centered header">{{ pagePreview.title }}</h3>
+    <div class="ui divider"></div>
     <app-notelist-editmode></app-notelist-editmode>
+    <app-notelist-editmode-placeholder></app-notelist-editmode-placeholder>
   
-    <!-- Controls -->
   </div>
   <div class="ui four bottom attached buttons">
     <div class="ui button">Add Page</div>
