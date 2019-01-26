@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { NotePreviewService } from 'src/app/services/note-preview.service';
+import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
 
 @Component({
   selector: 'app-edit-note',
@@ -10,22 +10,24 @@ import { NotePreviewService } from 'src/app/services/note-preview.service';
 })
 export class EditNoteComponent implements OnInit, OnDestroy {
 
-  private placeholderSubscription: Subscription;
+  private previewPlaceholderSubscription: Subscription;
 
-  placeholder: boolean = true;
+  newNoteIsCreated: boolean;
+  previewPlaceholder: boolean;
 
-  constructor(private notePreview: NotePreviewService) { }
+  constructor(private UI: NotePreviewUiService) { }
 
   ngOnInit() {
-    this.placeholderSubscription = this.notePreview.notePlaceholder.subscribe(
-      (condition) => {
-        this.placeholder = condition;
+    this.newNoteIsCreated = this.UI.getNewNoteIsCreatedCondition();
+    this.previewPlaceholder = this.UI.getPreviewPlaceholderCondition();
+    this.previewPlaceholderSubscription = this.UI.previewPlaceholderSubject.subscribe(
+      (condition: boolean) => {
+        this.previewPlaceholder = condition;
       }
     );
   }
-
+  
   ngOnDestroy() {
-    this.placeholderSubscription.unsubscribe();
+    this.previewPlaceholderSubscription.unsubscribe();
   }
-
 }

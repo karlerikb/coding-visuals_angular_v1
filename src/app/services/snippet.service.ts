@@ -11,6 +11,7 @@ export class SnippetService {
 
   noteId: string;
   private snippets: Array<UnmodifiedSnippet> = [];
+  private snippetString: string = '';
 
   // List flags
   private nextIsList: boolean;
@@ -132,7 +133,7 @@ export class SnippetService {
     this.nextIsList = (next === 'list') ? true : false;
   }
 
-  generateSnippets(inputText: string): Array<Snippet> {
+  convertTextToSnippets(inputText: string): Array<Snippet> {
     const inputChunks: Array<string> = this.inputToArray(inputText);
     const unmodifiedSnippets: Array<UnmodifiedSnippet> = this.generateSnippetObjectsArray(inputChunks);
     const modifiedSnippets: Array<Snippet> = this.modifySnippets(unmodifiedSnippets);
@@ -140,5 +141,40 @@ export class SnippetService {
     return snippets;
   }
 
+  private appendTextSnippet(snippet: Snippet): void {
+    this.snippetString += `${snippet.contents[0]}\r\n`;
+  }
 
+  private appendListSnippet(snippet: Snippet): void {
+    const list = snippet.contents;
+    if (snippet.conf.headerList) this.stringifyHeaderListSnippet(list)
+    else this.stringifyListSnippet(list);
+  }
+
+  private stringifyHeaderListSnippet(list: Array<string>): void {
+    let listString = '';
+    list.forEach((item, index) => {
+      if (index === 0) listString += `${item}\r\n`;
+      else listString += `* ${item}\r\n`;
+    });
+    this.snippetString += listString;
+  }
+
+  private stringifyListSnippet(list: Array<string>): void {
+    let listString = '';
+    list.forEach(item => listString += `* ${item}\r\n`);
+    this.snippetString += listString;
+  }
+
+  convertSnippetsToText(snippets: Array<Snippet>): string {
+    snippets.forEach(snippet => {
+      if (snippet.type === 'text') this.appendTextSnippet(snippet);
+      if (snippet.type === 'list') this.appendListSnippet(snippet);
+    });
+    return this.snippetString;
+  }
+
+  reset() {
+    this.snippetString = '';
+  }
 }

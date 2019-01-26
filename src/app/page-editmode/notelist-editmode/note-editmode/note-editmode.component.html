@@ -1,9 +1,47 @@
-<div class="ui basic segment">
-  <h4 class="ui header">Note Title</h4>
-  <div class="ui basic segment">
-    <p>Body</p>
-    <p>Body</p>
+<div class="ui" [ngClass]="{segments: noteDetailsOpen}">
+  <div class="ui segment" [ngClass]="{basic: !noteDetailsOpen}">
+    <div class="ui grid headerRow">
+      <div class="twelve wide column">
+        <h4 class="ui header hoverable" (click)="onCloseNoteDetails()" *ngIf="noteDetailsOpen">
+          <i class="angle up icon"></i>
+          <div class="content">{{ note.title }}</div>
+        </h4>
+        <h4 class="ui header hoverable" (click)="onOpenNoteDetails()" *ngIf="!noteDetailsOpen && !lockControls">
+          <i class="angle down icon"></i>
+          <div class="content">{{ note.title }}</div>
+        </h4>
+        <h4 class="ui header" *ngIf="lockControls">
+          <i class="lock icon"></i>
+          <div class="content">{{ note.title }}</div>
+        </h4>
+
+
+      </div>
+      <div class="four wide column">
+        <div class="controls" *ngIf="noteDetailsOpen">
+          <i class="arrow up icon" *ngIf="!firstNote" (click)="onMoveNoteUp()"></i>
+          <i class="arrow down icon" *ngIf="!lastNote" (click)="onMoveNoteDown()"></i>
+          <i class="pencil icon" (click)="onEditNote()"></i>
+          <i class="trash icon" (click)="onRemoveNote()"></i>
+        </div>
+      </div>
+    </div>
+    <app-snippet-notelist
+      *ngFor="let snippet of note.snippets"
+      [snippet]="snippet"
+      [snippetArrayLength]="note.snippets.length"
+      [noteDetailsOpen]="noteDetailsOpen">
+    </app-snippet-notelist>
   </div>
-  <div class="ui label">Tag</div>
-  <div class="ui label">Tag</div>
+  <div class="ui bottom attached segment" *ngIf="noteDetailsOpen">
+    <div class="ui grid">
+      <div class="fourteen wide column">
+        <div class="ui label">Pos: {{ note.conf.position }}</div>
+        <div class="ui label" *ngFor="let tag of note.tags">{{ tag }}</div>
+      </div>
+      <div class="two wide column">
+        <div class="ui right ribbon label" *ngIf="noteDetailsOpen">{{ note.id }}</div>
+      </div>
+    </div>
+  </div>
 </div>

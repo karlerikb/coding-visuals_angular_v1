@@ -1,0 +1,46 @@
+<div class="ui grid">
+  <div class="one wide column foldSnippetButtonContainer" [ngClass]="{hoverActiveIcon: hoverActive}" *ngIf="noteDetailsOpen">
+    <i class="angle up icon foldSnippetButton" (click)="onCloseSnippetDetails()" *ngIf="snippetDetailsOpen"></i>
+    <i class="angle down icon foldSnippetButton" (click)="onOpenSnippetDetails()" *ngIf="!snippetDetailsOpen"></i>
+  </div>
+  <div class="column" [ngClass]="{fifteen: noteDetailsOpen, wide: noteDetailsOpen}">
+    <div class="ui" [ngClass]="{segments: snippetDetailsOpen && noteDetailsOpen}">
+      <div class="ui basic segment">
+        <div class="ui grid">
+          <div class="twelve wide column" *ngIf="noteDetailsOpen" [ngClass]="{hoverActive: hoverActive}" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+            <ng-container [ngSwitch]="snippet.type">
+              <app-textsnippet-editmode *ngSwitchCase="'text'" [snippet]="snippet.contents[0]" (click)="onSwitchSnippetDetails()"></app-textsnippet-editmode>
+              <app-listsnippet-editmode *ngSwitchCase="'list'" [snippet]="listSnippet" (click)="onSwitchSnippetDetails()"></app-listsnippet-editmode>
+            </ng-container>
+          </div>
+          <div class="twelve wide column" *ngIf="!noteDetailsOpen">
+            <ng-container [ngSwitch]="snippet.type">
+              <app-textsnippet-editmode *ngSwitchCase="'text'" [snippet]="snippet.contents[0]"></app-textsnippet-editmode>
+              <app-listsnippet-editmode *ngSwitchCase="'list'" [snippet]="listSnippet"></app-listsnippet-editmode>
+            </ng-container>
+          </div>
+          <div class="four wide column">
+            <div class="controls" *ngIf="snippetDetailsOpen && noteDetailsOpen">
+              <i class="arrow up icon" *ngIf="!firstSnippet" (click)="onMoveSnippetUp()"></i>
+              <i class="arrow down icon" *ngIf="!lastSnippet" (click)="onMoveSnippetDown()"></i>
+              <i class="trash icon" (click)="onRemoveSnippet()"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui bottom attached segment" *ngIf="snippetDetailsOpen && noteDetailsOpen">
+        <div class="ui grid">
+          <div class="twelve wide column">
+            <div class="ui labels">
+              <div class="ui label">Type <div class="detail">{{ snippet.type }}</div></div>
+              <div class="ui label">Position <div class="detail">{{ snippet.conf.position }}</div></div>
+            </div>
+          </div>
+          <div class="four wide column">
+            <div class="ui right ribbon label">{{ snippet.id }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

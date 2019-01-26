@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
-import { Note } from 'src/app/models/note.model';
 
 import { PagePreviewService } from 'src/app/services/page-preview.service';
 import { NotePreviewService } from 'src/app/services/note-preview.service';
@@ -10,23 +8,21 @@ import { PagePreviewUiService } from 'src/app/services/page-preview-ui.service';
 import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
 
 @Component({
-  selector: 'app-edit-note-form',
-  templateUrl: './edit-note-form.component.html',
-  styleUrls: ['./edit-note-form.component.css']
+  selector: 'app-new-note-form',
+  templateUrl: './new-note-form.component.html',
+  styleUrls: ['./new-note-form.component.css']
 })
-export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NewNoteFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('noteForm') form: NgForm;
-  @ViewChild('noteTitle') noteTitle: NgModel;
-  @ViewChild('noteText') noteText: NgModel;
   @ViewChild('noteTags') noteTags: ElementRef;
 
   private addTagButtonSubscription: Subscription;
-  private editNoteButtonSubscription: Subscription;
+  private addNoteButtonSubscription: Subscription;
   private clearNoteButtonSubscription: Subscription;
 
   addTagButtonIsDisabled: boolean;
-  editNoteButtonIsDisabled: boolean;
+  addNoteButtonIsDisabled: boolean;
   clearNoteButtonIsDisabled: boolean;
 
   noteId: string;
@@ -39,21 +35,20 @@ export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.noteId = this.noteData.getId();
-    this.noteUI.updateTagsArrayLength(this.noteData.tags.length);
+    this.noteUI.updateTagsArrayLength(0);
 
     this.addTagButtonIsDisabled = this.noteUI.getAddTagButtonCondition();
-    this.editNoteButtonIsDisabled = this.noteUI.getAddNoteButtonCondition();
+    this.addNoteButtonIsDisabled = this.noteUI.getAddNoteButtonCondition();
     this.clearNoteButtonIsDisabled = this.noteUI.getClearNoteButtonCondition();
-
 
     this.addTagButtonSubscription = this.noteUI.formAddTagButtonSubject.subscribe(
       (condition: boolean) => {
         this.addTagButtonIsDisabled = condition;
       }
     );
-    this.editNoteButtonSubscription = this.noteUI.formAddNoteButtonSubject.subscribe(
+    this.addNoteButtonSubscription = this.noteUI.formAddNoteButtonSubject.subscribe(
       (condition: boolean) => {
-        this.editNoteButtonIsDisabled = condition;
+        this.addNoteButtonIsDisabled = condition;
       }
     );
     this.clearNoteButtonSubscription = this.noteUI.formClearNoteButtonSubject.subscribe(
@@ -63,49 +58,22 @@ export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  ngAfterViewInit() {
-    // this is hacky.. needs to be changed when I find a better solution
-    setTimeout(() => {
-      this.onFillFormData();
-    }, 1);
-  }
-
-
-  onEditNote(): void {
-    const confirmEdit = confirm('Sure you want to overwrite the previous note?');
-    if (confirmEdit) {
-      this.setEditNoteValues();
-      this.resetForm();
-    }
-  }
-
-  private setEditNoteValues(): void {
-    const editedNote = this.noteData.prepareNote();
-    const originalNote = this.pageData.notes.find(note => note.id === editedNote.id);
-    originalNote.title = editedNote.title;
-    originalNote.snippets = editedNote.snippets;
-    originalNote.tags = editedNote.tags;
+  onAddNote(): void {
+    const note = this.noteData.prepareNote();
+    this.pageData.addNoteToPage(note);
+    this.pageUI.removeNoteForm();
   }
 
   onClearNote(): void {
-    const confirmClear = confirm('Sure you want to clear this note?');
-    if (confirmClear) this.clearForm();
-  }
-
-  onDeleteNote(): void {
-    const confirmRemove = confirm('Sure you want to delete this note?');
-    if (confirmRemove) {
-      this.resetForm();
-      this.pageData.removeNoteFromPage(this.noteId);
-    }
-  }
-
-  onCancel(): void {
     this.resetForm();
   }
 
-  onInputTitle(): void {
-    const input = this.noteTitle.value;
+  onDeleteNote(): void {
+    this.pageUI.removeNoteForm();
+  }
+
+  onInputTitle(noteTitleInput: NgModel): void {
+    const input = noteTitleInput.value;
     this.noteData.title = input;
 
     if (input.trim() == '') {
@@ -115,8 +83,8 @@ export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onInputNoteText(): void {
-    const input = this.noteText.value;
+  onInputNoteText(noteTextInput: NgModel) {
+    const input = noteTextInput.value;
     this.noteData.generateSnippets(input);
 
     if (input.trim() == '' || input.trim() == '*') {
@@ -141,36 +109,21 @@ export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resetTagsField();
   }
 
-  private resetTagsField(): void {
+  resetTagsField(): void {
     this.noteTags.nativeElement.value = '';
     this.noteUI.isTagsFieldSet(false);
   }
 
-  private clearForm(): void {
+  resetForm(): void {
     this.form.reset();
     this.resetTagsField();
     this.noteData.reset();
   }
 
-  private resetForm(): void {
-    this.clearForm();
-    this.pageUI.removeNoteForm();
-  }
-
-  onFillFormData(): void {
-    this.form.setValue({
-      'noteTitle': this.noteData.title,
-      'noteText': this.noteData.snippetText
-    });
-    this.onInputTitle();
-    this.onInputNoteText();
-  }
-
   ngOnDestroy() {
     this.addTagButtonSubscription.unsubscribe();
-    this.editNoteButtonSubscription.unsubscribe();
+    this.addNoteButtonSubscription.unsubscribe();
     this.clearNoteButtonSubscription.unsubscribe();
     this.noteData.reset();
   }
-
 }

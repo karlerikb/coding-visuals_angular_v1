@@ -8,13 +8,12 @@ import { NotePreviewService } from 'src/app/services/note-preview.service';
 })
 export class EditNotePreviewComponent implements OnInit {
 
-  constructor(private notePreview: NotePreviewService) { }
+  constructor(private noteData: NotePreviewService) { }
 
   ngOnInit() {
   }
 
-  onRemoveTag(tagToBeDeleted: string) {
-    this.notePreview.removeTag(tagToBeDeleted);
+  onRemoveTag(tagToBeRemoved: string) {
+    this.noteData.removeTag(tagToBeRemoved);
   }
-
 }

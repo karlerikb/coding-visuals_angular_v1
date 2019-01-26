@@ -1,9 +1,5 @@
-<div class="ui vertical segment">
-  <app-note-editmode></app-note-editmode>
-</div>
-<div class="ui vertical segment">
-  <app-note-editmode></app-note-editmode>
-</div>
-<div class="ui vertical segment">
-  <app-note-editmode></app-note-editmode>
+<div class="ui basic segment">
+  <div class="ui vertical segment" *ngFor="let note of pageData.notes">
+    <app-note-editmode [note]="note"></app-note-editmode>
+  </div>
 </div>

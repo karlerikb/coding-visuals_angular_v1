@@ -1,6 +1,7 @@
 <div class="ui basic segment">
-  <app-edit-note-form></app-edit-note-form>
+  <app-new-note-form *ngIf="newNoteIsCreated"></app-new-note-form>
+  <app-edit-note-form *ngIf="!newNoteIsCreated"></app-edit-note-form>
   <div class="ui divider"></div>
-  <app-edit-note-preview *ngIf="!placeholder"></app-edit-note-preview>
-  <app-edit-note-preview-placeholder *ngIf="placeholder"></app-edit-note-preview-placeholder>
+  <app-edit-note-preview *ngIf="!previewPlaceholder"></app-edit-note-preview>
+  <app-edit-note-preview-placeholder *ngIf="previewPlaceholder"></app-edit-note-preview-placeholder>
 </div>

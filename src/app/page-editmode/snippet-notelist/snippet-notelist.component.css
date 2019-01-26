@@ -1,0 +1,33 @@
+.angle.icon:hover,
+.controls i:hover {
+  color: #797979;
+  cursor: pointer;
+}
+
+.hoverActive {
+  cursor: pointer;
+}
+
+.hoverActiveIcon {
+  color: #797979;
+}
+
+.controls {
+  padding-right: 0.5em;
+  text-align: right;
+}
+
+.controls i {
+  padding: 0 1em;
+}
+
+.foldSnippetButtonContainer {
+  position: relative;
+}
+
+.foldSnippetButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,26 @@
+.controls i:hover {
+  color: #797979;
+  cursor: pointer;
+}
+
+.hoverable:hover {
+  color: #797979;
+  cursor: pointer;
+}
+
+.lock.icon {
+  font-size: 1em;
+}
+
+.headerRow {
+  margin-bottom: 0.5em;
+}
+
+.controls {
+  padding-right: 0.5em;
+  text-align: right;
+}
+
+.controls i {
+  padding: 0 1em;
+}

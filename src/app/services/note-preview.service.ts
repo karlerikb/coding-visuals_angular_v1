@@ -1,94 +1,102 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { Note } from '../models/note.model';
+import { NoteConf } from '../models/note-conf.model';
 import { Snippet } from '../models/snippet.model';
-import { NoteService } from './note.service';
+
 import { SnippetService } from './snippet.service';
+import { NotePreviewUiService } from './note-preview-ui.service';
+import { PagePreviewUiService } from './page-preview-ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotePreviewService {
 
-  notePlaceholder = new Subject<boolean>();
-  formTagButton = new Subject<boolean>();
-  clearNoteButton = new Subject<boolean>();
-
-  id: string;
-  title: string;
+  private id: string = null;
+  title: string = null;
+  snippetText: string;
   snippets: Array<Snippet> = [];
   tags: Array<string> = [];
 
-  newNoteIsCreated: boolean = false;
-
-  private titleField: boolean = false;
-  private textField: boolean = false;
-  private tagsField: boolean = false;
-
-  private placeholder: boolean = true;
-  private tagButtonDisabled: boolean = true;
-  private clearNoteButtonDisabled: boolean = false;
-
-
+  
   constructor(
-    private noteService: NoteService,
-    private snippetService: SnippetService) { }
+    private pageUI: PagePreviewUiService,
+    private UI: NotePreviewUiService,
+    private snippetGenerator: SnippetService) { }
 
-  generateNoteId(pageId: number) {
-    const currentNoteArrayLength = this.noteService.getNotes().length;
-    this.id = `${pageId}-${currentNoteArrayLength + 1}`;
+  
+  private generateId(pageId: string, noteIdCounter: number): void {
+    this.id = `${pageId}-${noteIdCounter}`;
   }
 
-  generateNoteSnippets(input: string) {
-    this.snippetService.noteId = this.id;
-    this.snippets = this.snippetService.generateSnippets(input);
+  getId(): string {
+    return this.id;
   }
 
-  addTag(tag: string) {
+  initNew(pageId: string, noteIdCounter: number): void {
+    this.generateId(pageId, noteIdCounter);
+  }
+
+  private initEdit(note: Note): void {
+    this.pageUI.displayNoteForm();
+    this.UI.displayEditNoteForm();
+    this.setEditModeValues(note);
+    this.pageUI.scrollToForm();
+  }
+
+  generateSnippets(input: string): void {
+    this.snippetGenerator.noteId = this.id;
+    this.snippets = this.snippetGenerator.convertTextToSnippets(input);
+  }
+
+  addTag(tag: string): void {
+    this.addTagToArray(tag);
+    this.evaluateTagsUI();
+  }
+
+  private addTagToArray(tag: string): void {
     if (!this.tags.includes(tag)) this.tags.push(tag);
-    this.evaluatePlaceholder();
   }
 
-  removeTag(tagToBeDeleted: string) {
-    this.tags = this.tags.filter(tag => tag !== tagToBeDeleted);
-    this.evaluatePlaceholder();
+  removeTag(tag: string): void {
+    this.removeTagFromArray(tag);
+    this.evaluateTagsUI();
   }
 
-  isTitleFieldSet(isSet: boolean) {
-    this.titleField = (isSet) ? true : false;
-    this.evaluatePlaceholder();
+  private removeTagFromArray(tagToBeRemoved: string): void {
+    this.tags = this.tags.filter(tag => tag !== tagToBeRemoved);
   }
 
-  isTextFieldSet(isSet: boolean) {
-    this.textField = (isSet) ? true : false;
-    this.evaluatePlaceholder();
+  private evaluateTagsUI(): void {
+    this.UI.updateTagsArrayLength(this.tags.length);
+    this.UI.evaluate();
   }
 
-  isTagsFieldSet(isSet: boolean) {
-    this.tagsField = (isSet) ? true : false;
-    this.evaluatePlaceholder();
-  }
-
-  clearPreview() {
-    this.id = null;
+  reset(): void {
     this.title = null;
     this.snippets = [];
     this.tags = [];
-    this.titleField = false;
-    this.textField = false;
-    this.tagsField = false;
-    this.evaluatePlaceholder();
+    this.snippetText = null;
+    this.UI.reset();
   }
 
-  private evaluatePlaceholder() {
-    this.placeholder = (!this.titleField && !this.textField && this.tags.length === 0 ) ? true : false;
-    this.notePlaceholder.next(this.placeholder);
-
-    this.tagButtonDisabled = (!this.tagsField) ? true : false;
-    this.formTagButton.next(this.tagButtonDisabled);
-
-    this.clearNoteButtonDisabled = (this.placeholder && !this.tagsField) ? true : false;
-    this.clearNoteButton.next(this.clearNoteButtonDisabled);
+  editNote(note: Note) {
+    this.initEdit(note);
   }
 
+  private setEditModeValues(note: Note) {
+    this.id = note.id;
+    this.title = note.title;
+    this.tags = note.tags;
+    this.snippetText = this.snippetGenerator.convertSnippetsToText(note.snippets);
+    this.snippetGenerator.reset();
+  }
+
+  prepareNote(): Note {
+    const position = null;
+    if (this.title == null || this.title == undefined) this.title = '';
+    return new Note(this.id, this.title, this.snippets, this.tags, new NoteConf(position));
+  }
 }

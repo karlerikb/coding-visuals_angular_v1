@@ -1,15 +1,18 @@
 import { Snippet } from './snippet.model';
+import { NoteConf } from './note-conf.model';
 
 export class Note {
-  id: number;
+  id: string;
   title: string;
   snippets: Array<Snippet>;
   tags: Array<string>;
+  conf: NoteConf;
 
-  constructor(id: number, title: string, snippets: Array<Snippet>, tags: Array<string>) {
+  constructor(id: string, title: string, snippets: Array<Snippet>, tags: Array<string>, conf: NoteConf) {
     this.id = id;
     this.title = title;
     this.snippets = snippets;
     this.tags = tags;
+    this.conf = conf;
   }
 }

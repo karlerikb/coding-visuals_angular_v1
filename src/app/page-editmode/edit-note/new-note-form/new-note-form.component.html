@@ -1,6 +1,5 @@
 <div class="ui segments">
   <div class="ui top attached segment">
-    <p class="formMode">Edit Mode</p>
     <form class="ui form" #noteForm="ngForm">
       <div class="inline fields">
         <div class="thirteen wide field">
@@ -11,7 +10,7 @@
             type="text"
             name="noteTitle"
             placeholder="Note Title"
-            (input)="onInputTitle()">
+            (input)="onInputTitle(noteTitle)">
         </div>
         <div class="three wide field">
           <label>Id</label>
@@ -25,7 +24,7 @@
           #noteText="ngModel"
           name="noteText"
           placeholder="Note Text"
-          (input)="onInputNoteText()"
+          (input)="onInputNoteText(noteText)"
           ></textarea>
       </div>
       <div class="inline fields">
@@ -55,9 +54,9 @@
     <button
       class="ui button"
       type="submit"
-      (click)="onEditNote()"
-      [disabled]="editNoteButtonIsDisabled">
-      Edit Note
+      (click)="onAddNote()"
+      [disabled]="addNoteButtonIsDisabled">
+      Add Note
     </button>
     <button
       class="ui button"
@@ -75,9 +74,8 @@
     <button
       class="ui button"
       type="button"
-      (click)="onCancel()">
+      disabled>
       Cancel Edit
     </button>
   </div>
 </div>
-  
