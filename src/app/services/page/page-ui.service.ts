@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PagePreviewUiService {
+export class PageUIService {
 
   lockNotelistControlsSubject = new Subject<boolean>();
 

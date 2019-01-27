@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { Note } from 'src/app/models/note.model';
 import { Snippet } from 'src/app/models/snippet.model';
 
-import { SnippetDataService } from 'src/app/services/snippet-data.service';
-import { NotePreviewService } from 'src/app/services/note-preview.service';
-import { PagePreviewService } from 'src/app/services/page-preview.service';
-import { PagePreviewUiService } from 'src/app/services/page-preview-ui.service';
+import { SnippetDataService } from 'src/app/services/snippet/snippet-data.service';
+import { NoteDataService } from 'src/app/services/note/note-data.service';
+import { PageDataService } from 'src/app/services/page/page-data.service';
+import { PageUIService } from 'src/app/services/page/page-ui.service';
 
 @Component({
   selector: 'app-note-editmode',
@@ -30,9 +30,9 @@ export class NoteEditmodeComponent implements OnInit, OnDestroy {
 
   constructor(
     private snippetData: SnippetDataService,
-    private NoteData: NotePreviewService,
-    private pageData: PagePreviewService,
-    private pageUI: PagePreviewUiService) { }
+    private NoteData: NoteDataService,
+    private pageData: PageDataService,
+    private pageUI: PageUIService) { }
 
   ngOnInit() {
     this.onCloseNoteDetails();

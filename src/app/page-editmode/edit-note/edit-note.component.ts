@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
+import { NoteUIService } from 'src/app/services/note/note-ui.service';
 
 @Component({
   selector: 'app-edit-note',
@@ -15,7 +15,7 @@ export class EditNoteComponent implements OnInit, OnDestroy {
   newNoteIsCreated: boolean;
   previewPlaceholder: boolean;
 
-  constructor(private UI: NotePreviewUiService) { }
+  constructor(private UI: NoteUIService) { }
 
   ngOnInit() {
     this.newNoteIsCreated = this.UI.getNewNoteIsCreatedCondition();

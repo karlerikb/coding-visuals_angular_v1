@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NotePreviewService } from 'src/app/services/note-preview.service';
+import { NoteDataService } from 'src/app/services/note/note-data.service';
 
 @Component({
   selector: 'app-edit-note-preview',
@@ -8,7 +8,7 @@ import { NotePreviewService } from 'src/app/services/note-preview.service';
 })
 export class EditNotePreviewComponent implements OnInit {
 
-  constructor(private noteData: NotePreviewService) { }
+  constructor(private noteData: NoteDataService) { }
 
   ngOnInit() {
   }

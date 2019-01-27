@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { NgForm, NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { PagePreviewService } from 'src/app/services/page-preview.service';
-import { NotePreviewService } from 'src/app/services/note-preview.service';
-import { PagePreviewUiService } from 'src/app/services/page-preview-ui.service';
-import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
+import { PageDataService } from 'src/app/services/page/page-data.service';
+import { NoteDataService } from 'src/app/services/note/note-data.service';
+import { PageUIService } from 'src/app/services/page/page-ui.service';
+import { NoteUIService } from 'src/app/services/note/note-ui.service';
 
 @Component({
   selector: 'app-new-note-form',
@@ -28,10 +28,10 @@ export class NewNoteFormComponent implements OnInit, OnDestroy {
   noteId: string;
   
   constructor(
-    private noteData: NotePreviewService,
-    private noteUI: NotePreviewUiService,
-    private pageData: PagePreviewService,
-    private pageUI: PagePreviewUiService) { }
+    private noteData: NoteDataService,
+    private noteUI: NoteUIService,
+    private pageData: PageDataService,
+    private pageUI: PageUIService) { }
 
   ngOnInit() {
     this.noteId = this.noteData.getId();
@@ -61,15 +61,23 @@ export class NewNoteFormComponent implements OnInit, OnDestroy {
   onAddNote(): void {
     const note = this.noteData.prepareNote();
     this.pageData.addNoteToPage(note);
-    this.pageUI.removeNoteForm();
-  }
-
-  onClearNote(): void {
     this.resetForm();
   }
 
+  onClearNote(): void {
+    const confirmClear = confirm('Sure you want to clear this note?');
+    if (confirmClear) this.clearForm();
+  }
+
   onDeleteNote(): void {
-    this.pageUI.removeNoteForm();
+    const confirmRemove = confirm('Sure you want to delete this note?');
+    if (confirmRemove) {
+      this.resetForm();
+    }
+  }
+
+  onCancel(): void {
+    this.resetForm();
   }
 
   onInputTitle(noteTitleInput: NgModel): void {
@@ -109,15 +117,20 @@ export class NewNoteFormComponent implements OnInit, OnDestroy {
     this.resetTagsField();
   }
 
-  resetTagsField(): void {
+  private resetTagsField(): void {
     this.noteTags.nativeElement.value = '';
     this.noteUI.isTagsFieldSet(false);
   }
 
-  resetForm(): void {
+  private clearForm(): void {
     this.form.reset();
     this.resetTagsField();
     this.noteData.reset();
+  }
+
+  private resetForm(): void {
+    this.clearForm();
+    this.pageUI.removeNoteForm();
   }
 
   ngOnDestroy() {

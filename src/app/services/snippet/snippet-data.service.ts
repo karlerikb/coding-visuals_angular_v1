@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Snippet } from '../models/snippet.model';
+import { Snippet } from '../../models/snippet.model';
 
-import { PagePreviewService } from './page-preview.service';
+import { PageDataService } from '../page/page-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SnippetDataService {
   noteSubject = new Subject<number>();
   removeSnippetSubject = new Subject<Array<Snippet>>();
 
-  constructor(private pageData: PagePreviewService) { }
+  constructor(private pageData: PageDataService) { }
 
   switchSnippetPositions(snippetId: string, currentPos: number, newPos: number): void {
     const snippets = this.getCurrentNoteSnippets(snippetId);

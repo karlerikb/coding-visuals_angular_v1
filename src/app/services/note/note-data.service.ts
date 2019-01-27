@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
-import { Note } from '../models/note.model';
-import { NoteConf } from '../models/note-conf.model';
-import { Snippet } from '../models/snippet.model';
+import { Note } from '../../models/note.model';
+import { NoteConf } from '../../models/note-conf.model';
+import { Snippet } from '../../models/snippet.model';
 
-import { SnippetService } from './snippet.service';
-import { NotePreviewUiService } from './note-preview-ui.service';
-import { PagePreviewUiService } from './page-preview-ui.service';
+import { SnippetGeneratorService } from '../snippet/snippet-generator.service';
+import { NoteUIService } from './note-ui.service';
+import { PageUIService } from '../page/page-ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotePreviewService {
+export class NoteDataService {
 
   private id: string = null;
   title: string = null;
@@ -22,9 +21,9 @@ export class NotePreviewService {
 
   
   constructor(
-    private pageUI: PagePreviewUiService,
-    private UI: NotePreviewUiService,
-    private snippetGenerator: SnippetService) { }
+    private pageUI: PageUIService,
+    private UI: NoteUIService,
+    private snippetGenerator: SnippetGeneratorService) { }
 
   
   private generateId(pageId: string, noteIdCounter: number): void {

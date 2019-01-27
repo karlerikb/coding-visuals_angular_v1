@@ -26,7 +26,7 @@ import { ListsnippetEditmodeComponent } from './page-editmode/snippet-editmode/l
 import { SnippetNotelistComponent } from './page-editmode/snippet-notelist/snippet-notelist.component';
 import { EditNoteFormComponent } from './page-editmode/edit-note/edit-note-form/edit-note-form.component';
 
-import { PageService } from './services/page.service';
+import { PagesService } from './services/page/pages.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { PageService } from './services/page.service';
     AppRoutingModule
   ],
   providers: [
-    PageService
+    PagesService
   ],
   bootstrap: [AppComponent]
 })

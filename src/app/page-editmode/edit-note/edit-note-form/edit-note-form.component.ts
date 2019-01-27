@@ -2,12 +2,10 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } fr
 import { NgForm, NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { Note } from 'src/app/models/note.model';
-
-import { PagePreviewService } from 'src/app/services/page-preview.service';
-import { NotePreviewService } from 'src/app/services/note-preview.service';
-import { PagePreviewUiService } from 'src/app/services/page-preview-ui.service';
-import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
+import { PageDataService } from 'src/app/services/page/page-data.service';
+import { NoteDataService } from 'src/app/services/note/note-data.service';
+import { PageUIService } from 'src/app/services/page/page-ui.service';
+import { NoteUIService } from 'src/app/services/note/note-ui.service';
 
 @Component({
   selector: 'app-edit-note-form',
@@ -32,10 +30,10 @@ export class EditNoteFormComponent implements OnInit, AfterViewInit, OnDestroy {
   noteId: string;
   
   constructor(
-    private noteData: NotePreviewService,
-    private noteUI: NotePreviewUiService,
-    private pageData: PagePreviewService,
-    private pageUI: PagePreviewUiService) { }
+    private noteData: NoteDataService,
+    private noteUI: NoteUIService,
+    private pageData: PageDataService,
+    private pageUI: PageUIService) { }
 
   ngOnInit() {
     this.noteId = this.noteData.getId();

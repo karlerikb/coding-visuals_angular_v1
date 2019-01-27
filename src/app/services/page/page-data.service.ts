@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Note } from '../models/note.model';
+import { Note } from '../../models/note.model';
 
-import { PageService } from './page.service';
+import { PagesService } from './pages.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PagePreviewService {
+export class PageDataService {
 
   notePositionSubject = new Subject();
 
@@ -22,7 +22,7 @@ export class PagePreviewService {
     // new Note('1-3', 'kolmas pealkiri', [new Snippet('1-3-1', 'text', ['tekst 1'], new SnippetConf(1, null)), new Snippet('1-3-2', 'text', ['tekst 2'], new SnippetConf(2, null))], ['tag 1', 'tag 2'], new NoteConf(3))
   ];
 
-  constructor(private pages: PageService) { }
+  constructor(private pages: PagesService) { }
 
   
   private generateId(): void {
@@ -61,8 +61,8 @@ export class PagePreviewService {
 
   removeNoteFromPage(noteId: string): void {
     this.removeNoteFromArray(noteId);
-    this.orderNotesByPosition();
     this.updateNotePositions();
+    this.orderNotesByPosition();
   }
 
   removeNoteFromArray(noteId: string): void {

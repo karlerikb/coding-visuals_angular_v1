@@ -68,13 +68,15 @@
     <button
       class="ui button"
       type="button"
-      (click)="onDeleteNote()">
+      (click)="onDeleteNote()"
+      [disabled]="addNoteButtonIsDisabled">
       Delete Note
     </button>
     <button
       class="ui button"
       type="button"
-      disabled>
+      (click)="onCancel()"
+      [disabled]="!addNoteButtonIsDisabled">
       Cancel Edit
     </button>
   </div>

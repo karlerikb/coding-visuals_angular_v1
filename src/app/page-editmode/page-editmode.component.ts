@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PagePreviewService } from '../services/page-preview.service';
-import { PagePreviewUiService } from '../services/page-preview-ui.service';
-import { NotePreviewService } from '../services/note-preview.service';
-import { NotePreviewUiService } from '../services/note-preview-ui.service';
+import { PageDataService } from '../services/page/page-data.service';
+import { PageUIService } from '../services/page/page-ui.service';
+import { NoteDataService } from '../services/note/note-data.service';
+import { NoteUIService } from '../services/note/note-ui.service';
 
 @Component({
   selector: 'app-page-editmode',
   templateUrl: './page-editmode.component.html',
   styleUrls: ['./page-editmode.component.css'],
-  providers: [PagePreviewService, PagePreviewUiService, NotePreviewService, NotePreviewUiService]
+  providers: [PageDataService, PageUIService, NoteDataService, NoteUIService]
 })
 export class PageEditmodeComponent implements OnInit {
 
   constructor(
-    private pagePreview: PagePreviewService,
-    private pagePreviewUI: PagePreviewUiService,
-    private notePreview: NotePreviewService) { }
+    private pageData: PageDataService,
+    private pageUI: PageUIService) { }
 
   ngOnInit() {
-    this.pagePreview.init();
-    this.pagePreviewUI.init();
+    this.pageData.init();
+    this.pageUI.init();
   }
 }

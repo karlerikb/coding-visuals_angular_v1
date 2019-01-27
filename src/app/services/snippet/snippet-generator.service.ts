@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { UnmodifiedSnippet } from '../models/unmodified-snippet.model';
-import { Snippet } from '../models/snippet.model';
-import { SnippetConf } from '../models/snippet-conf.model';
+import { UnmodifiedSnippet } from '../../models/unmodified-snippet.model';
+import { Snippet } from '../../models/snippet.model';
+import { SnippetConf } from '../../models/snippet-conf.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SnippetService {
+export class SnippetGeneratorService {
 
   noteId: string;
   private snippets: Array<UnmodifiedSnippet> = [];

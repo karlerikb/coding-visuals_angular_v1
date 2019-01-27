@@ -8,24 +8,24 @@
       <div class="ui inline fields">
         <div class="thirteen wide field">
           <label>Title</label>
-          <input type="text" name="pageTitle" placeholder="Page Title" [(ngModel)]="pagePreview.title">
+          <input type="text" name="pageTitle" placeholder="Page Title" [(ngModel)]="pageData.title">
         </div>
         <div class="three wide field">
           <label>Id</label>
-          <input type="text" readonly [value]="pagePreview.getId()">
+          <input type="text" readonly [value]="pageData.getId()">
         </div>
       </div>
     </form>
     
     <h3 id="addOrEditNoteHeader" class="ui right aligned small header">Add or Edit Note</h3>
-    <app-edit-note *ngIf="pagePreviewUI.noteFormAvailable"></app-edit-note>
-    <app-edit-note-placeholder *ngIf="!pagePreviewUI.noteFormAvailable"></app-edit-note-placeholder>
+    <app-edit-note *ngIf="pageUI.noteFormAvailable"></app-edit-note>
+    <app-edit-note-placeholder *ngIf="!pageUI.noteFormAvailable"></app-edit-note-placeholder>
   
     <h3 class="ui right aligned small header">Page Preview</h3>
-    <h3 class="ui large centered header">{{ pagePreview.title }}</h3>
+    <h3 class="ui large centered header">{{ pageData.title }}</h3>
     <!-- <div class="ui divider"></div> -->
-    <app-notelist-editmode *ngIf="pagePreview.notes.length > 0"></app-notelist-editmode>
-    <app-notelist-editmode-placeholder *ngIf="pagePreview.notes.length === 0"></app-notelist-editmode-placeholder>
+    <app-notelist-editmode *ngIf="pageData.notes.length > 0"></app-notelist-editmode>
+    <app-notelist-editmode-placeholder *ngIf="pageData.notes.length === 0"></app-notelist-editmode-placeholder>
   
   </div>
   <div class="ui four bottom attached buttons">

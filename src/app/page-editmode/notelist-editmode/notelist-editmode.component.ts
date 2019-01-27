@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PagePreviewService } from 'src/app/services/page-preview.service';
+import { PageDataService } from 'src/app/services/page/page-data.service';
 
 @Component({
   selector: 'app-notelist-editmode',
@@ -8,7 +8,7 @@ import { PagePreviewService } from 'src/app/services/page-preview.service';
 })
 export class NotelistEditmodeComponent implements OnInit {
 
-  constructor(private pageData: PagePreviewService) { }
+  constructor(private pageData: PageDataService) { }
 
   ngOnInit() {
   }

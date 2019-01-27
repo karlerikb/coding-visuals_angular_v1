@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PagePreviewUiService } from 'src/app/services/page-preview-ui.service';
-import { PagePreviewService } from 'src/app/services/page-preview.service';
-import { NotePreviewService } from 'src/app/services/note-preview.service';
-import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
+import { PageUIService } from 'src/app/services/page/page-ui.service';
+import { PageDataService } from 'src/app/services/page/page-data.service';
+import { NoteDataService } from 'src/app/services/note/note-data.service';
+import { NoteUIService } from 'src/app/services/note/note-ui.service';
 
 @Component({
   selector: 'app-edit-note-placeholder',
@@ -13,10 +13,10 @@ import { NotePreviewUiService } from 'src/app/services/note-preview-ui.service';
 export class EditNotePlaceholderComponent implements OnInit {
 
   constructor(
-    private pageData: PagePreviewService,
-    private pageUI: PagePreviewUiService,
-    private noteData: NotePreviewService,
-    private noteUI: NotePreviewUiService) { }
+    private pageData: PageDataService,
+    private pageUI: PageUIService,
+    private noteData: NoteDataService,
+    private noteUI: NoteUIService) { }
 
   ngOnInit() {
   }

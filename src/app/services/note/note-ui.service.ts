@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class NotePreviewUiService {
+export class NoteUIService {
 
   previewPlaceholderSubject = new Subject<boolean>();
   formAddTagButtonSubject = new Subject<boolean>();
