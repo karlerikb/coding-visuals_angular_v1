@@ -1,4 +1,4 @@
-import { Snippet } from './snippet.model';
+import { Snippet } from '../snippet/snippet.model';
 import { NoteConf } from './note-conf.model';
 
 export class Note {

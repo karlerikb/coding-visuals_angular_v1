@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { UnmodifiedSnippet } from '../../models/unmodified-snippet.model';
-import { Snippet } from '../../models/snippet.model';
-import { SnippetConf } from '../../models/snippet-conf.model';
+import { UnmodifiedSnippet } from '../../models/snippet/unmodified-snippet.model';
+import { Snippet } from '../../models/snippet/snippet.model';
+import { SnippetConf } from '../../models/snippet/snippet-conf.model';
 
 @Injectable({
   providedIn: 'root'

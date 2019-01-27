@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Snippet } from '../../models/snippet.model';
+import { Snippet } from '../../models/snippet/snippet.model';
 
 import { PageDataService } from '../page/page-data.service';
 

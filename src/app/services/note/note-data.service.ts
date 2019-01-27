@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Note } from '../../models/note.model';
-import { NoteConf } from '../../models/note-conf.model';
-import { Snippet } from '../../models/snippet.model';
+import { Note } from '../../models/note/note.model';
+import { NoteConf } from '../../models/note/note-conf.model';
+import { Snippet } from '../../models/snippet/snippet.model';
 
 import { SnippetGeneratorService } from '../snippet/snippet-generator.service';
 import { NoteUIService } from './note-ui.service';

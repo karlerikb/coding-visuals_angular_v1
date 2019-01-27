@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Snippet } from 'src/app/models/snippet.model';
+import { Snippet } from 'src/app/models/snippet/snippet.model';
 import { SnippetDataService } from 'src/app/services/snippet/snippet-data.service';
 
 

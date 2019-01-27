@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Note } from 'src/app/models/note.model';
-import { Snippet } from 'src/app/models/snippet.model';
+import { Note } from 'src/app/models/note/note.model';
+import { Snippet } from 'src/app/models/snippet/snippet.model';
 
 import { SnippetDataService } from 'src/app/services/snippet/snippet-data.service';
 import { NoteDataService } from 'src/app/services/note/note-data.service';

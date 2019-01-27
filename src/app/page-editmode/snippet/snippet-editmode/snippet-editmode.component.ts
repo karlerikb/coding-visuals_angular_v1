@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Snippet } from 'src/app/models/snippet.model';
+import { Snippet } from 'src/app/models/snippet/snippet.model';
 
 @Component({
   selector: 'app-snippet-editmode',
